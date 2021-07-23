@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>uniqueInOrder</title>
+	</head>
+	<body>
+		<script>
+			/* uniqueInOrder("AAAABBBCCDAABBB") == ["A", "B", "C", "D", "A", "B"]
+						uniqueInOrder("ABBCcAD") == ["A", "B", "C", "c", "A", "D"]
+						uniqueInOrder([1, 2, 2, 3, 3]) == [1, 2, 3] */
+
+			/* var uniqueInOrder = function (iterable) {
+				//your code here - remember iterable can be a string or an array
+				let arr = []
+				if (iterable.length) {
+					if (typeof iterable === "string") iterable = iterable.split("")
+					arr.push(iterable[0])
+					iterable.reduce((prev, curr) => {
+						if (prev !== curr) arr.push(curr)
+						return curr
+					})
+				}
+				return arr
+			} */
+
+			var uniqueInOrder = function (iterable) {
+				return [...iterable].filter((a, i) => a !== iterable[i - 1])
+			}
+
+			console.log(uniqueInOrder("AAAABBBCCDAABBB"))
+			console.log(uniqueInOrder([1, 2, 2, 2, 3, 3]))
+		</script>
+	</body>
+</html>
