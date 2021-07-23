@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CalcWithObj</title>
+	</head>
+	<body>
+		<script>
+			class Num {
+				constructor(num) {
+					this.num = num
+				}
+				toString() {
+					return "The number is " + this.num
+				}
+				valueOf() {
+					return { num: this.num }
+				}
+			}
+			Num.prototype = Number
+
+			console.log(new Num(5) + new Num(5))
+		</script>
+	</body>
+</html>
