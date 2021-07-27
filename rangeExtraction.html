@@ -47,7 +47,7 @@
 				return str
 			} */
 
-			function solution(list) {
+			/* function solution(list) {
 				for (var i = 0; i < list.length; i++) {
 					var j = i
 					while (list[j] - list[j + 1] == -1) j++
@@ -55,7 +55,16 @@
 						list.splice(i, j - i + 1, list[i] + "-" + list[j])
 				}
 				return list.join()
-			}
+			} */
+
+			solution = (list) =>
+				list.reduce((acc, curr, i) => {
+					if (i == 0) return curr.toString()
+					if (list[i - 1] == curr - 1 && list[i + 1] == curr + 1) return acc
+					if (list[i - 1] == curr - 1 && list[i - 2] == curr - 2)
+						return acc + "-" + curr
+					return acc + "," + curr
+				})
 
 			console.log(
 				solution([

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>stripComments</title>
+	</head>
+	<body>
+		<script>
+			/* checkComments(
+							"apples, plums % and bananas\npears\noranges !applesauce",
+							["%", "!"],
+							"apples, plums\npears\noranges"
+							)
+							checkComments("Q @b\nu\ne -e f g", ["@", "-"], "Q\nu\ne") */
+
+			function solution(input, markers) {
+				let arr = input.split("")
+				let markerIndexesIncludeSpace = findMarkerIndexesIncludeSpace(
+					arr,
+					markers
+				)
+				let stopperIndexes = findStopperIndexes(arr)
+
+				// stopperIndexesReview
+				markerIndexesIncludeSpace.reduce((prev, curr) => {
+					let newarr = stopperIndexes.filter(
+						(num) => num >= prev && num <= curr
+					)
+					stopperIndexes.splice(
+						stopperIndexes.findIndex((item) => item === newarr[1]),
+						newarr.length - 1
+					)
+					return curr
+				})
+
+				// work with array
+				for (let i = markerIndexesIncludeSpace.length - 1; i >= 0; i--) {
+					const markerIndex = markerIndexesIncludeSpace[i]
+					const stoperIndex =
+						stopperIndexes[i] !== undefined ? stopperIndexes[i] : arr.length
+					arr.splice(markerIndex, stoperIndex - markerIndex)
+				}
+				return arr.join("")
+			}
+
+			function findMarkerIndexesIncludeSpace(arr, markers) {
+				let markersIndexes = []
+				markers.forEach((marker) => {
+					markersIndexes = [
+						...markersIndexes,
+						...getAllElementIndexes(arr, marker),
+					]
+				})
+
+				return markersIndexes.map((markerIndex) =>
+					arr[markerIndex - 1] === " " ? --markerIndex : markerIndex
+				)
+			}
+
+			function findStopperIndexes(arr) {
+				return getAllElementIndexes(arr, "\n")
+			}
+
+			function getAllElementIndexes(arr, marker) {
+				let indexes = []
+				for (let i = 0; i < arr.length; i++)
+					if (arr[i] === marker) indexes.push(i)
+				return indexes
+			}
+
+			console.log(
+				solution("apples, plums % and bananas\npears\noranges !applesauce", [
+					"%",
+					"!",
+				])
+			)
+			console.log(solution("Q @b\nu\ne -e f g", ["@", "-"]))
+		</script>
+	</body>
+</html>
