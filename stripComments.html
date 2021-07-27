@@ -42,7 +42,8 @@
 						stopperIndexes[i] !== undefined ? stopperIndexes[i] : arr.length
 					arr.splice(markerIndex, stoperIndex - markerIndex)
 				}
-				return arr.join("")
+
+				return arr.map((elem) => (elem === "\n" ? "\\n" : elem)).join("")
 			}
 
 			function findMarkerIndexesIncludeSpace(arr, markers) {
