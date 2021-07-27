@@ -15,6 +15,17 @@
 							)
 							checkComments("Q @b\nu\ne -e f g", ["@", "-"], "Q\nu\ne") */
 
+			// How should be
+			function solution(input, markers) {
+				return input
+					.split("\n")
+					.map((line) =>
+						markers.reduce((line, marker) => line.split(marker)[0].trim(), line)
+					)
+					.join("\n")
+			}
+
+			// My decision
 			function solution(input, markers) {
 				let arr = input.split("")
 				let markerIndexesIncludeSpace = findMarkerIndexesIncludeSpace(
