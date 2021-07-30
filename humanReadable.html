@@ -8,25 +8,25 @@
 	</head>
 	<body>
 		<script>
-			/* Write a function, which takes a non-negative integer (seconds) as input and 
+			/* Write a function, which takes a non-negative integer (sec) as input and 
 returns the time in a human-readable format (HH:MM:SS)
 
 HH = hours, padded to 2 digits, range: 00 - 99
 MM = minutes, padded to 2 digits, range: 00 - 59
-SS = seconds, padded to 2 digits, range: 00 - 59
+SS = sec, padded to 2 digits, range: 00 - 59
 The maximum time never exceeds 359999 (99:59:59) */
 
-			function humanReadable(seconds) {
-				/* if (Number.isInteger(seconds)) {
-					if (seconds >= 0 && seconds <= 359999) {
+			function humanReadable(sec) {
+				/* if (Number.isInteger(sec)) {
+					if (sec >= 0 && sec <= 359999) {
 						let hh,
 							mm,
 							ss = 0
-						seconds / 3600 >= 1 ? (hh = Math.floor(seconds / 3600)) : (hh = 0)
-						seconds -= hh * 3600
-						seconds / 60 >= 1 ? (mm = Math.floor(seconds / 60)) : (mm = 0)
-						seconds -= mm * 60
-						ss = seconds
+						sec / 3600 >= 1 ? (hh = Math.floor(sec / 3600)) : (hh = 0)
+						sec -= hh * 3600
+						sec / 60 >= 1 ? (mm = Math.floor(sec / 60)) : (mm = 0)
+						sec -= mm * 60
+						ss = sec
 
 						hh = hh.toString()
 						mm = mm.toString()
@@ -38,16 +38,16 @@ The maximum time never exceeds 359999 (99:59:59) */
 						return hh + ":" + mm + ":" + ss
 					}
 				} */
-				function humanReadable(seconds) {
+				function humanReadable(sec) {
 					var pad = function (x) {
 						return x < 10 ? "0" + x : x
 					}
 					return (
-						pad(parseInt(seconds / (60 * 60))) +
+						pad(parseInt(sec / (60 * 60))) +
 						":" +
-						pad(parseInt((seconds / 60) % 60)) +
+						pad(parseInt((sec / 60) % 60)) +
 						":" +
-						pad(seconds % 60)
+						pad(sec % 60)
 					)
 				}
 			}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>formatDuration</title>
+	</head>
+	<body>
+		<script>
+			// formatDuration(62) // returns "1 minute and 2 sec"
+			// formatDuration(3662) // returns "1 hour, 1 minute and 2 sec"
+
+			function formatDuration(seconds) {
+				let time = {}
+				let str = ""
+				let arr = []
+				let sec = seconds
+				if (sec >= 31536000) {
+					time.year = Math.floor(sec / 31536000)
+					sec = sec - time.year * 31536000
+				}
+				if (sec >= 86400) {
+					time.day = Math.floor(sec / 86400)
+					sec = sec - time.day * 86400
+				}
+				if (sec >= 3600) {
+					time.hour = Math.floor(sec / 3600)
+					sec = sec - time.hour * 3600
+				}
+				if (sec >= 60) {
+					time.minute = Math.floor(sec / 60)
+					sec = sec - time.minute * 60
+				}
+				time.second = sec
+				for (const key in time) {
+					const value = time[key]
+					if (value !== 0)
+						value === 1
+							? arr.push(`${value} ${key}`)
+							: arr.push(`${value} ${key}s`)
+				}
+				if (arr.length === 1) str += arr[0]
+				if (arr.length === 2) str += arr[0] + " and " + arr[1]
+				if (arr.length > 2) {
+					for (let i = 0; i < arr.length - 2; i++) {
+						const element = arr[i]
+						str += element + ", "
+					}
+					str += arr[arr.length - 2] + " and " + arr[arr.length - 1]
+				}
+				return seconds === 0 ? "now" : str
+			}
+
+			console.log(formatDuration(62))
+			console.log(formatDuration(60))
+			console.log(formatDuration(3601))
+			console.log(formatDuration(632422))
+		</script>
+	</body>
+</html>
